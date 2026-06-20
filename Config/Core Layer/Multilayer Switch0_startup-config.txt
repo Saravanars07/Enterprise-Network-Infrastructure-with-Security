@@ -1,0 +1,159 @@
+!
+version 17.6
+service timestamps log datetime msec
+service timestamps debug datetime msec
+no service password-encryption
+!
+hostname ABC
+!
+!
+enable secret 9 $9$J19FIAftPZf7c3$op.YBKgRW7E7MsBsbs3/Cd1mVnscv4NoXB1d0KEf4XU
+!
+!
+!
+!
+!
+!
+no ip cef
+ip routing
+!
+no ipv6 cef
+!
+!
+!
+ptp mode e2etransparent
+username admin password 0 admin
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain-name ABC.in
+!
+!
+rep admin vlan 100
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 1.1.1.1 255.255.255.255
+!
+interface GigabitEthernet1/1
+!
+interface GigabitEthernet1/2
+!
+interface GigabitEthernet1/3
+ switchport trunk allowed vlan 10,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/4
+ switchport trunk allowed vlan 20,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/5
+ switchport trunk allowed vlan 30,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/6
+ switchport trunk allowed vlan 40
+ switchport mode trunk
+!
+interface GigabitEthernet1/7
+ switchport trunk allowed vlan 50
+ switchport mode trunk
+!
+interface GigabitEthernet1/8
+ no switchport
+ ip address 10.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/9
+!
+interface GigabitEthernet1/10
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ mac-address 0007.ecc0.5e02
+ ip address 192.168.1.1 255.255.255.0
+ ip helper-address 192.168.4.2
+!
+interface Vlan20
+ mac-address 0007.ecc0.5e03
+ ip address 192.168.2.1 255.255.255.0
+ ip helper-address 192.168.4.2
+!
+interface Vlan30
+ mac-address 0007.ecc0.5e04
+ ip address 192.168.3.1 255.255.255.0
+ ip helper-address 192.168.4.2
+!
+interface Vlan40
+ mac-address 0007.ecc0.5e05
+ ip address 192.168.4.1 255.255.255.0
+!
+interface Vlan50
+ mac-address 0007.ecc0.5e06
+ ip address 192.168.5.1 255.255.255.0
+ ip helper-address 192.168.4.2
+!
+interface Vlan100
+ mac-address 0007.ecc0.5e01
+ no ip address
+!
+router ospf 1
+ log-adjacency-changes
+ network 1.1.1.1 0.0.0.0 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 192.168.3.0 0.0.0.255 area 0
+ network 192.168.4.0 0.0.0.255 area 0
+ network 192.168.5.0 0.0.0.255 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+banner login #Authzoried people can access#
+banner motd #Welcome to ABC company#
+!
+!
+!
+snmp-server community public RO
+snmp-server community publie RO
+snmp-server community private RW
+snmp-server community 192.168.5.511 RW
+snmp-server community 192.168.5.11 RW
+snmp-server community read RO
+!
+logging 192.168.4.2
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+ transport output ssh
+!
+!
+!
+ntp server 192.168.4.2
+!
+end
+

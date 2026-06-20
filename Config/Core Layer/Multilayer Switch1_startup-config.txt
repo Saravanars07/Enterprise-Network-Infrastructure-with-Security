@@ -1,0 +1,134 @@
+!
+version 17.6
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Switch
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+ip routing
+!
+no ipv6 cef
+!
+!
+!
+ptp mode e2etransparent
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet1/1
+!
+interface GigabitEthernet1/2
+!
+interface GigabitEthernet1/3
+ switchport trunk allowed vlan 10,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/4
+ switchport trunk allowed vlan 20,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/5
+ switchport trunk allowed vlan 30,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/6
+ switchport trunk allowed vlan 40,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/7
+ switchport trunk allowed vlan 50
+ switchport mode trunk
+!
+interface GigabitEthernet1/8
+ no switchport
+ ip address 10.0.0.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/9
+!
+interface GigabitEthernet1/10
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ mac-address 000b.be92.4701
+ ip address 192.168.1.1 255.255.255.0
+ ip helper-address 192.168.4.2
+!
+interface Vlan20
+ mac-address 000b.be92.4702
+ ip address 192.168.2.1 255.255.255.0
+ ip helper-address 192.168.4.2
+!
+interface Vlan30
+ mac-address 000b.be92.4703
+ ip address 192.168.3.1 255.255.255.0
+ ip helper-address 192.168.4.2
+!
+interface Vlan40
+ mac-address 000b.be92.4704
+ ip address 192.168.4.1 255.255.255.0
+!
+interface Vlan50
+ mac-address 000b.be92.4705
+ ip address 192.168.5.1 255.255.255.0
+ ip helper-address 192.168.4.2
+!
+router ospf 1
+ router-id 2.2.2.2
+ log-adjacency-changes
+ network 10.0.0.0 0.0.0.3 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 192.168.3.0 0.0.0.255 area 0
+ network 192.168.4.0 0.0.0.255 area 0
+ network 192.168.5.0 0.0.0.255 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+!
+end
+
