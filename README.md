@@ -263,15 +263,10 @@ Through this project I gained hands-on experience in:
 
 ## Network Topology
 
-```text
-Add Screenshot Here
-```
 
-Example:
+![Topology](Screenshot/Topology.png)
 
-```markdown
-![Topology](images/topology.png)
-```
+
 
 ---
 
